@@ -164,7 +164,3 @@ class AG:
         #definição dos intervalos
         #nMax=2**self.tamCrom #maior número decimal obtido de acordo com o tamanho em bits do cromossomo
             
-a=AG()
-v=[1,1,1,1]
-tc=4
-print a.ConvBinToDec(v,tc)
