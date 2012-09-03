@@ -123,15 +123,48 @@ class AG:
     def GetPopulacaoInicial(self):
         return self.PopIni
     
-    def ConverterCromossomo(self,tCrom):
-        """ converter cromossomo de uma base binária para uma base decimal 
-            - Tamanho do cromossomo (tCrom)
-        """
+    def CalcIntervalos(self,dimen,tCrom):
+        """ Calcula os intervalos em que a cadeia será desmembrada. Relação com a dimensão (dimen) do problema e o tamanho do cromossomo (tCrom) """
+        _vInt=[]        
         fim=-1
-        for i in range(self.dimensao):        
+        for i in range(dimen):        
             ini=fim+1
-            fim=ini+(tC-1)
-            print ini,fim
-        #nMax=2**self.tamCrom #maior número decimal obtido de acordo com o tamanho em bits do cromossomo
+            fim=ini+(tCrom-1)
+            #_vAptidao=self.PopIni[]
+            _vInt.append(ini)
+            _vInt.append(fim)
+        return _vInt
+    
+    def ConvBinToDec(self,num,tCrom):
+        """ Converte número binário para decimal de acordo com tamanho do cromossomo(tC) 
+            - o Número (num) é um array ou lista de tamanha tC, onde cada posição é armazenado somente um bit"""
+        _dec=0        
+        for k in range(tCrom):
+            _dec=_dec+num[k]*(2**k)
+        return _dec
         
+    def ConverterCromossomo(self,dimen,tCrom,tC):
+        """ converter cromossomo de uma base binária para uma base decimal 
+            - Dimensão (dimen)
+            - Tamanho do cromossomo (tCrom)
+            - Tamanho da cadeia (tC)
+        """
+        #_vInt=self.CalcIntervalos(dimen,tCrom)
+        _vAptidao=[]
+        for i in range(self.tamPop):
+            ini,fim=0,-1            
+            for j in range(dimen):        
+                ini=fim+1
+                fim=ini+(tCrom-1)
+                _vAptidao.append(self.ConvBinToDec(self.PopIni[i][ini:fim+1],self.tamCrom))
+        _vApt=array([_vAptidao]) #convertendo em array para melhor visualização dos cromossomos
+        _vApt.shape=(self.tamPop,self.dimensao)
+        print _vApt
+        
+        #definição dos intervalos
+        #nMax=2**self.tamCrom #maior número decimal obtido de acordo com o tamanho em bits do cromossomo
+            
 a=AG()
+v=[1,1,1,1]
+tc=4
+print a.ConvBinToDec(v,tc)
