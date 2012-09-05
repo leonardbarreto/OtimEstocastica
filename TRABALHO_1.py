@@ -11,6 +11,7 @@ import math
 
 def funcao(x):
     ff = -(sum(fabs(x))*exp(-sum(x**2))) #sinal  negativo no início, pois queremos achar o mínimo da função
+    #ff = -(sum(fabs(x))*exp(-sum(np.power(x,x))))   
     return ff
     
 def luus_jaakola(nint,nout,raios,contract,dimen):
@@ -132,7 +133,7 @@ NP=7
 D=2
 CR=0.6
 F=1.5
-G=100
+G=1000
 evolucao_diferencial2(NP,D,F,G,CR)
 nint=3
 nout=4
