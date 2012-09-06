@@ -1,0 +1,11 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	editor = gedit
+[remote "origin"]
+	url = https://github.com/leonardbarreto/ProbInversos.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[alias]
+	com = !git add . && git commit -a && git push
