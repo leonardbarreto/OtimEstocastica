@@ -27,6 +27,7 @@ class BuscaHarmonica:
     def funcao(self,x):
         """ Definição da função objetivo do problema proposto """
         return -(sum(fabs(x))*exp(-sum(x**2))) # Minimizar (sinal negativo)
+    
     def grafico(self):
         entrada = pylab.arange(0, 20, 1)
         saida=self.funcao(entrada)
@@ -36,7 +37,7 @@ class BuscaHarmonica:
         pylab.title('f(x1,x2)')
         pylab.grid(True)
         pylab.show()
-        return 0
+        #return 0
     
     def set_nova_harmonia(self,_p_nInst):
         _vnh=[]     #Novo vetor harmônico
@@ -132,11 +133,10 @@ class BuscaHarmonica:
     def calculate(self):
         """ Método responsavel por realizar o cálculo """
         for k in range(self._mi): #até o número máximo de iterações        
-            self.set_nova_harmonia(a._n_inst)            
-            self.improvisar_nova_memoria(a._tx_hmcr,a._fw,a._hms)
-            self.atualizar_memoria_harmonica(a._v_nova_harmonia)
-        self.grafico()
+            self.set_nova_harmonia(self._n_inst)            
+            self.improvisar_nova_memoria(self._tx_hmcr,self._fw,self._hms)
+            self.atualizar_memoria_harmonica(self._v_nova_harmonia)
         return self.melhor_harmonia(self._mHarm)
         
    
-#a=BuscaHarmonica()
+a=BuscaHarmonica()
