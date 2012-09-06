@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>FireFly</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Module&nbsp;FireFly
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="FireFly-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="FireFly-module.html">Module FireFly</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment"># -*- coding: utf-8 -*-</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">Created on Thu Sep  6 07:31:46 2012</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring">@author: leonard</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"> </tt>
+<a name="FireFly"></a><div id="FireFly-def"><a name="L8"></a><tt class="py-lineno">  8</tt> <a class="py-toggle" href="#" id="FireFly-toggle" onclick="return toggle('FireFly');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="FireFly.FireFly-class.html">FireFly</a><tt class="py-op">:</tt> </tt>
+</div><div id="FireFly-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="FireFly-expanded"><a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line">    <tt class="py-comment"># Par&#226;metros importantes do algoritmo</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line">    <tt class="py-comment">#   - r -&gt; dist&#227;ncia euclidiana entre os vagalumes i e j, sendo i o mais brilhante e j o menos brilhante</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line">    <tt class="py-comment">#   - _gama     -&gt; coeficiente (real) de absor&#231;ao de luz pelo meio</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line">    <tt class="py-comment">#   - _beta     -&gt; fator de atratividade    </tt> </tt>
+<a name="FireFly.__init__"></a><div id="FireFly.__init__-def"><a name="L13"></a><tt class="py-lineno"> 13</tt> <a class="py-toggle" href="#" id="FireFly.__init__-toggle" onclick="return toggle('FireFly.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="FireFly.FireFly-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FireFly.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FireFly.__init__-expanded"><a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_fFlies</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-op">]</tt>                 <tt class="py-comment">#popula&#231;&#227;o de fireflies        </tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_dimen</tt><tt class="py-op">=</tt><tt class="py-number">2</tt>                   <tt class="py-comment">#dimens&#227;o do problema</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_qtd_fireflies</tt><tt class="py-op">=</tt><tt class="py-number">6</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_gama</tt><tt class="py-op">=</tt><tt class="py-name">uniform</tt><tt class="py-op">(</tt><tt class="py-number">0.01</tt><tt class="py-op">,</tt><tt class="py-number">100</tt><tt class="py-op">)</tt>    <tt class="py-comment">#coeficiente (real) de absor&#231;ao de luz pelo meio</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_alfa</tt><tt class="py-op">=</tt><tt class="py-op">(</tt><tt class="py-name">float</tt><tt class="py-op">)</tt><tt class="py-op">(</tt><tt class="py-name">rand</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">)</tt>     <tt class="py-comment">#par&#226;metro de randomiza&#231;&#227;o para a movimenta&#231;&#227;o de um firefly</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_n_geracoes</tt><tt class="py-op">=</tt><tt class="py-number">1000</tt>           <tt class="py-comment">#n&#250;mero de gera&#231;&#245;es</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_beta0</tt><tt class="py-op">=</tt><tt class="py-number">1</tt>                   <tt class="py-comment">#Atratividade para dist&#226;ncia r=0</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Method FireFly.FireFly.set_populacao_inicial()=FireFly.FireFly-class.html#set_populacao_inicial"><a title="FireFly.FireFly.set_populacao_inicial" class="py-name" href="#" onclick="return doclink('link-0', 'set_populacao_inicial', 'link-0');">set_populacao_inicial</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_dimen</tt><tt class="py-op">,</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_qtd_fireflies</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line">     </tt>
+<a name="FireFly.funcao"></a><div id="FireFly.funcao-def"><a name="L23"></a><tt class="py-lineno"> 23</tt> <a class="py-toggle" href="#" id="FireFly.funcao-toggle" onclick="return toggle('FireFly.funcao');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="FireFly.FireFly-class.html#funcao">funcao</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">x</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FireFly.funcao-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FireFly.funcao-expanded"><a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line">        <tt class="py-docstring">""" Defini&#231;&#227;o da fun&#231;&#227;o objetivo do problema proposto """</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-op">-</tt><tt class="py-op">(</tt><tt class="py-name">sum</tt><tt class="py-op">(</tt><tt class="py-name">fabs</tt><tt class="py-op">(</tt><tt id="link-1" class="py-name" targets="Variable FireFly.x=FireFly-module.html#x"><a title="FireFly.x" class="py-name" href="#" onclick="return doclink('link-1', 'x', 'link-1');">x</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">*</tt><tt class="py-name">exp</tt><tt class="py-op">(</tt><tt class="py-op">-</tt><tt class="py-name">sum</tt><tt class="py-op">(</tt><tt id="link-2" class="py-name"><a title="FireFly.x" class="py-name" href="#" onclick="return doclink('link-2', 'x', 'link-1');">x</a></tt><tt class="py-op">**</tt><tt class="py-number">2</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> <tt class="py-comment"># Minimizar (sinal negativo)</tt> </tt>
+</div><a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line">        <tt class="py-comment">#return (x[0]**2)+x[1]</tt> </tt>
+<a name="FireFly.set_intensidade_emitida_de_luz"></a><div id="FireFly.set_intensidade_emitida_de_luz-def"><a name="L27"></a><tt class="py-lineno"> 27</tt> <a class="py-toggle" href="#" id="FireFly.set_intensidade_emitida_de_luz-toggle" onclick="return toggle('FireFly.set_intensidade_emitida_de_luz');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="FireFly.FireFly-class.html#set_intensidade_emitida_de_luz">set_intensidade_emitida_de_luz</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">_pFflies</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FireFly.set_intensidade_emitida_de_luz-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FireFly.set_intensidade_emitida_de_luz-expanded"><a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line">        <tt class="py-docstring">""" Criar e calcular a intensidade de emiss&#227;o de luz de cada firefly. A intensidade de luz (Ii) de cada firefly (FFi) &#233; determinado pelo valor f(xi). </tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-docstring">            Par&#226;metros:</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">                - _pFflies -&gt; populacao de fireflies"""</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_qtd_fireflies</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_luminosidade</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">=</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-3" class="py-name" targets="Method FireFly.FireFly.funcao()=FireFly.FireFly-class.html#funcao"><a title="FireFly.FireFly.funcao" class="py-name" href="#" onclick="return doclink('link-3', 'funcao', 'link-3');">funcao</a></tt><tt class="py-op">(</tt><tt class="py-name">_pFflies</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">     </tt>
+<a name="FireFly.get_intensidade_emitida_de_luz"></a><div id="FireFly.get_intensidade_emitida_de_luz-def"><a name="L34"></a><tt class="py-lineno"> 34</tt> <a class="py-toggle" href="#" id="FireFly.get_intensidade_emitida_de_luz-toggle" onclick="return toggle('FireFly.get_intensidade_emitida_de_luz');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="FireFly.FireFly-class.html#get_intensidade_emitida_de_luz">get_intensidade_emitida_de_luz</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FireFly.get_intensidade_emitida_de_luz-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FireFly.get_intensidade_emitida_de_luz-expanded"><a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_luminosidade</tt> </tt>
+</div><a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">     </tt>
+<a name="FireFly.calcular_fator_de_atratividade"></a><div id="FireFly.calcular_fator_de_atratividade-def"><a name="L37"></a><tt class="py-lineno"> 37</tt> <a class="py-toggle" href="#" id="FireFly.calcular_fator_de_atratividade-toggle" onclick="return toggle('FireFly.calcular_fator_de_atratividade');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="FireFly.FireFly-class.html#calcular_fator_de_atratividade">calcular_fator_de_atratividade</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FireFly.calcular_fator_de_atratividade-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FireFly.calcular_fator_de_atratividade-expanded"><a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">        <tt class="py-docstring">""" Calcular o fator de atratividade entre os firefly mais brilhante e o menos brilhante.</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-docstring">            Requisitos:</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line"><tt class="py-docstring">                - Obter o firefly mais brilhante e o menos brilhante atrav&#233;s da avalia&#231;&#227;o dos valores do vetor _luminosidade</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"><tt class="py-docstring">                - Calcular a dist&#226;ncia euclideana entre os dois fireflies</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-docstring">                - Aplicar a f&#243;rmula com os seguintes par&#227;metros:</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-docstring">                    * _beta0-&gt; coeficiente de atratividade</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"><tt class="py-docstring">                    * _gama -&gt; coeficiente de absor&#231;&#227;o de luz</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-docstring">                    * _r    -&gt; dist&#226;ncia euclideana entre os dois pontos</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt class="py-name">_ffMaisBri</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Method FireFly.FireFly.get_mais_brilhante()=FireFly.FireFly-class.html#get_mais_brilhante"><a title="FireFly.FireFly.get_mais_brilhante" class="py-name" href="#" onclick="return doclink('link-4', 'get_mais_brilhante', 'link-4');">get_mais_brilhante</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_luminosidade</tt><tt class="py-op">)</tt>         </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">        <tt class="py-name">_ffMenosBri</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-5" class="py-name" targets="Method FireFly.FireFly.get_menos_brilhante()=FireFly.FireFly-class.html#get_menos_brilhante"><a title="FireFly.FireFly.get_menos_brilhante" class="py-name" href="#" onclick="return doclink('link-5', 'get_menos_brilhante', 'link-5');">get_menos_brilhante</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_luminosidade</tt><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_r</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-6" class="py-name" targets="Method FireFly.FireFly.set_distancia_euclidiana()=FireFly.FireFly-class.html#set_distancia_euclidiana"><a title="FireFly.FireFly.set_distancia_euclidiana" class="py-name" href="#" onclick="return doclink('link-6', 'set_distancia_euclidiana', 'link-6');">set_distancia_euclidiana</a></tt><tt class="py-op">(</tt><tt class="py-name">_ffMaisBri</tt><tt class="py-op">,</tt><tt class="py-name">_ffMenosBri</tt><tt class="py-op">)</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">        <tt class="py-name">beta</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_beta0</tt><tt class="py-op">*</tt><tt class="py-name">exp</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">**</tt><tt class="py-op">(</tt><tt class="py-op">-</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_gama</tt><tt class="py-op">*</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_r</tt><tt class="py-op">**</tt><tt class="py-number">2</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">beta</tt> </tt>
+</div><a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">         </tt>
+<a name="FireFly.set_movimentar_firefly"></a><div id="FireFly.set_movimentar_firefly-def"><a name="L53"></a><tt class="py-lineno"> 53</tt> <a class="py-toggle" href="#" id="FireFly.set_movimentar_firefly-toggle" onclick="return toggle('FireFly.set_movimentar_firefly');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="FireFly.FireFly-class.html#set_movimentar_firefly">set_movimentar_firefly</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">_de</tt><tt class="py-op">,</tt><tt class="py-param">_para</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FireFly.set_movimentar_firefly-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FireFly.set_movimentar_firefly-expanded"><a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-docstring">""" Reliza a movimenta&#231;&#227;o(atualiza coordenadas) de um firefly para o mais luminoso de acordo com a f&#243;rmula. """</tt>         </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">        <tt class="py-name">_beta</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method FireFly.FireFly.calcular_fator_de_atratividade()=FireFly.FireFly-class.html#calcular_fator_de_atratividade"><a title="FireFly.FireFly.calcular_fator_de_atratividade" class="py-name" href="#" onclick="return doclink('link-7', 'calcular_fator_de_atratividade', 'link-7');">calcular_fator_de_atratividade</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_fFlies</tt><tt class="py-op">[</tt><tt class="py-name">_de</tt><tt class="py-op">]</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_fFlies</tt><tt class="py-op">[</tt><tt class="py-name">_de</tt><tt class="py-op">]</tt><tt class="py-op">+</tt><tt class="py-name">_beta</tt><tt class="py-op">*</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_fFlies</tt><tt class="py-op">[</tt><tt class="py-name">_para</tt><tt class="py-op">]</tt><tt class="py-op">-</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_fFlies</tt><tt class="py-op">[</tt><tt class="py-name">_de</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">+</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_alfa</tt><tt class="py-op">*</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">float</tt><tt class="py-op">)</tt><tt class="py-op">(</tt><tt class="py-name">rand</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">-</tt><tt class="py-number">0.5</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">             </tt>
+<a name="FireFly.set_populacao_inicial"></a><div id="FireFly.set_populacao_inicial-def"><a name="L58"></a><tt class="py-lineno"> 58</tt> <a class="py-toggle" href="#" id="FireFly.set_populacao_inicial-toggle" onclick="return toggle('FireFly.set_populacao_inicial');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="FireFly.FireFly-class.html#set_populacao_inicial">set_populacao_inicial</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">_p_dimen</tt><tt class="py-op">,</tt><tt class="py-param">_p_qtdff</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FireFly.set_populacao_inicial-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FireFly.set_populacao_inicial-expanded"><a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line">        <tt class="py-docstring">""" Cria e inicializa a popula&#231;&#227;o de fireflies e a respectiva intensidade de luz, composta por n fireflies(vetores).</tt> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt class="py-docstring">            Par&#227;metros:</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring">                - _p_dimen -&gt; dimens&#227;o do problema</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring">                - _p_qtdff -&gt; Quantidade de fireflies do problema</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt>         </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_luminosidade</tt><tt class="py-op">=</tt><tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">_p_qtdff</tt><tt class="py-op">)</tt><tt class="py-op">:</tt>               <tt class="py-comment">#criar quantidade de fireflies definida...</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_fFlies</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">rand</tt><tt class="py-op">(</tt><tt class="py-name">_p_dimen</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> <tt class="py-comment">#...atribuindo valores reais para cada um entre 0..1</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_luminosidade</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">)</tt>          <tt class="py-comment">#criando um vetor nulo para armazenar informa&#231;&#245;es sobre a luminosidade de cada firefly</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-8" class="py-name" targets="Method FireFly.FireFly.set_intensidade_emitida_de_luz()=FireFly.FireFly-class.html#set_intensidade_emitida_de_luz"><a title="FireFly.FireFly.set_intensidade_emitida_de_luz" class="py-name" href="#" onclick="return doclink('link-8', 'set_intensidade_emitida_de_luz', 'link-8');">set_intensidade_emitida_de_luz</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_fFlies</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">         </tt>
+<a name="FireFly.get_populacao_fireflies"></a><div id="FireFly.get_populacao_fireflies-def"><a name="L70"></a><tt class="py-lineno"> 70</tt> <a class="py-toggle" href="#" id="FireFly.get_populacao_fireflies-toggle" onclick="return toggle('FireFly.get_populacao_fireflies');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="FireFly.FireFly-class.html#get_populacao_fireflies">get_populacao_fireflies</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FireFly.get_populacao_fireflies-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FireFly.get_populacao_fireflies-expanded"><a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_fFlies</tt> </tt>
+</div><a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">     </tt>
+<a name="FireFly.get_luminosidade"></a><div id="FireFly.get_luminosidade-def"><a name="L73"></a><tt class="py-lineno"> 73</tt> <a class="py-toggle" href="#" id="FireFly.get_luminosidade-toggle" onclick="return toggle('FireFly.get_luminosidade');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="FireFly.FireFly-class.html#get_luminosidade">get_luminosidade</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FireFly.get_luminosidade-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FireFly.get_luminosidade-expanded"><a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_intensidade_luz</tt> </tt>
+</div><a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line">     </tt>
+<a name="FireFly.get_mais_brilhante"></a><div id="FireFly.get_mais_brilhante-def"><a name="L76"></a><tt class="py-lineno"> 76</tt> <a class="py-toggle" href="#" id="FireFly.get_mais_brilhante-toggle" onclick="return toggle('FireFly.get_mais_brilhante');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="FireFly.FireFly-class.html#get_mais_brilhante">get_mais_brilhante</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">_p_iel</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FireFly.get_mais_brilhante-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FireFly.get_mais_brilhante-expanded"><a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">        <tt class="py-docstring">""" Retorna a posi&#231;&#227;o do firefly mais brilhante, ou seja, com maior valor na fun&#231;&#227;o objetivo.</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"><tt class="py-docstring">            Par&#226;metros:</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring">                - _p_iel -&gt; Intensidade Emitida de Luz de cada firefly (vetor)</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring">            Retorno:</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">                - _pMab -&gt; Identifica o firefly mais brilhante (posi&#231;&#227;o)</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">        <tt class="py-name">_pMab</tt><tt class="py-op">=</tt><tt class="py-number">0</tt>                         <tt class="py-comment"># posi&#231;&#227;o do mais brilhante</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">        <tt class="py-name">_vMab</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name"><a title="FireFly.FireFly.funcao" class="py-name" href="#" onclick="return doclink('link-9', 'funcao', 'link-3');">funcao</a></tt><tt class="py-op">(</tt><tt class="py-name">_p_iel</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt>    <tt class="py-comment"># valor do mais brilhante</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_qtd_fireflies</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">            <tt class="py-name">_v</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="FireFly.FireFly.funcao" class="py-name" href="#" onclick="return doclink('link-10', 'funcao', 'link-3');">funcao</a></tt><tt class="py-op">(</tt><tt class="py-name">_p_iel</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">)</tt>             </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">_v</tt><tt class="py-op">&gt;</tt><tt class="py-name">_pMab</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">                <tt class="py-name">_pMab</tt><tt class="py-op">=</tt><tt class="py-name">i</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">                <tt class="py-name">_vMab</tt><tt class="py-op">=</tt><tt class="py-name">_v</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">_pMab</tt> </tt>
+</div><a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">                         </tt>
+<a name="FireFly.get_menos_brilhante"></a><div id="FireFly.get_menos_brilhante-def"><a name="L92"></a><tt class="py-lineno"> 92</tt> <a class="py-toggle" href="#" id="FireFly.get_menos_brilhante-toggle" onclick="return toggle('FireFly.get_menos_brilhante');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="FireFly.FireFly-class.html#get_menos_brilhante">get_menos_brilhante</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">_p_iel</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FireFly.get_menos_brilhante-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FireFly.get_menos_brilhante-expanded"><a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">        <tt class="py-docstring">""" Retorna a posi&#231;&#227;o do firefly menos brilhante, ou seja, com maior valor na fun&#231;&#227;o objetivo.</tt> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"><tt class="py-docstring">            Par&#226;metros:</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"><tt class="py-docstring">                - _p_iel -&gt; Intensidade Emitida de Luz de cada firefly (vetor)</tt> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt class="py-docstring">            Retorno:</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">                - _vmeb -&gt; Intensidade de brilho (valor da fun&#231;&#227;o objetivo) do respectivo firefly</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line">        <tt class="py-name">_pmeb</tt><tt class="py-op">=</tt><tt class="py-number">0</tt>                         <tt class="py-comment"># posi&#231;&#227;o do menos brilhante</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt class="py-name">_vmeb</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name"><a title="FireFly.FireFly.funcao" class="py-name" href="#" onclick="return doclink('link-11', 'funcao', 'link-3');">funcao</a></tt><tt class="py-op">(</tt><tt class="py-name">_p_iel</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt>    <tt class="py-comment"># valor do mais brilhante</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">,</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_qtd_fireflies</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">            <tt class="py-name">_v</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name"><a title="FireFly.FireFly.funcao" class="py-name" href="#" onclick="return doclink('link-12', 'funcao', 'link-3');">funcao</a></tt><tt class="py-op">(</tt><tt class="py-name">_p_iel</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">)</tt>             </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">_v</tt><tt class="py-op">&lt;</tt><tt class="py-name">_pmeb</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">                <tt class="py-name">_pmeb</tt><tt class="py-op">=</tt><tt class="py-name">i</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">                <tt class="py-name">_vmeb</tt><tt class="py-op">=</tt><tt class="py-name">_v</tt> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">_pmeb</tt> </tt>
+</div><a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line">         </tt>
+<a name="FireFly.set_distancia_euclidiana"></a><div id="FireFly.set_distancia_euclidiana-def"><a name="L108"></a><tt class="py-lineno">108</tt> <a class="py-toggle" href="#" id="FireFly.set_distancia_euclidiana-toggle" onclick="return toggle('FireFly.set_distancia_euclidiana');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="FireFly.FireFly-class.html#set_distancia_euclidiana">set_distancia_euclidiana</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">_fforig</tt><tt class="py-op">,</tt><tt class="py-param">_ffdest</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FireFly.set_distancia_euclidiana-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FireFly.set_distancia_euclidiana-expanded"><a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line">        <tt class="py-docstring">""" Retorna a dist&#226;ncia euclidiana entre o firefly origem e destino.</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"><tt class="py-docstring">            Par&#226;metros:</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-docstring">                - _fforig -&gt; coordenada do firefly de origem</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt class="py-docstring">                - _ffdest -&gt; coordenada do firefly de destino</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"><tt class="py-docstring">            Retorno:</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-docstring">                - _de -&gt; dist&#226;ncia euclidiana entre os dois pontos</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line">        <tt class="py-name">_de</tt><tt class="py-op">=</tt><tt class="py-number">0</tt> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">j</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_dimen</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-comment">#calcula em fun&#231;&#227;o da dimens&#227;o do problema</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line">            <tt class="py-name">_de</tt><tt class="py-op">=</tt><tt class="py-name">_de</tt><tt class="py-op">+</tt><tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_fFlies</tt><tt class="py-op">[</tt><tt class="py-name">_fforig</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">j</tt><tt class="py-op">]</tt><tt class="py-op">-</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_fFlies</tt><tt class="py-op">[</tt><tt class="py-name">_ffdest</tt><tt class="py-op">]</tt><tt class="py-op">[</tt><tt class="py-name">j</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">**</tt><tt class="py-number">2</tt><tt class="py-op">)</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line">        <tt class="py-name">_de</tt><tt class="py-op">=</tt><tt class="py-name">sqrt</tt><tt class="py-op">(</tt><tt class="py-name">_de</tt><tt class="py-op">)</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">_de</tt> </tt>
+</div><a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line">       <tt class="py-comment"># rij - Dist&#227;ncia r entre o firefly(i) e o firefly(j)</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line">         </tt>
+<a name="FireFly.calculate"></a><div id="FireFly.calculate-def"><a name="L123"></a><tt class="py-lineno">123</tt> <a class="py-toggle" href="#" id="FireFly.calculate-toggle" onclick="return toggle('FireFly.calculate');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="FireFly.FireFly-class.html#calculate">calculate</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FireFly.calculate-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="FireFly.calculate-expanded"><a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">k</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_n_geracoes</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_qtd_fireflies</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">j</tt> <tt class="py-keyword">in</tt> <tt class="py-name">range</tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">,</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_qtd_fireflies</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">                    <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_luminosidade</tt><tt class="py-op">[</tt><tt class="py-name">j</tt><tt class="py-op">]</tt><tt class="py-op">&gt;</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_luminosidade</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> <tt class="py-comment">#Se algum firef</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-13" class="py-name" targets="Method FireFly.FireFly.set_movimentar_firefly()=FireFly.FireFly-class.html#set_movimentar_firefly"><a title="FireFly.FireFly.set_movimentar_firefly" class="py-name" href="#" onclick="return doclink('link-13', 'set_movimentar_firefly', 'link-13');">set_movimentar_firefly</a></tt><tt class="py-op">(</tt><tt class="py-name">i</tt><tt class="py-op">,</tt><tt class="py-name">j</tt><tt class="py-op">)</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line">                    <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="FireFly.FireFly.set_intensidade_emitida_de_luz" class="py-name" href="#" onclick="return doclink('link-14', 'set_intensidade_emitida_de_luz', 'link-8');">set_intensidade_emitida_de_luz</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_fFlies</tt><tt class="py-op">)</tt>   <tt class="py-comment">#Atualizar luminosidade de todos os vagalumes</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line">        <tt class="py-name">_mb</tt><tt class="py-op">=</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name"><a title="FireFly.FireFly.get_menos_brilhante" class="py-name" href="#" onclick="return doclink('link-15', 'get_menos_brilhante', 'link-5');">get_menos_brilhante</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_luminosidade</tt><tt class="py-op">)</tt>                <tt class="py-comment">#pegar a posi&#231;&#227;o do  menos brilhante</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-16" class="py-name"><a title="FireFly.FireFly.funcao" class="py-name" href="#" onclick="return doclink('link-16', 'funcao', 'link-3');">funcao</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">_fFlies</tt><tt class="py-op">[</tt><tt class="py-name">_mb</tt><tt class="py-op">]</tt><tt class="py-op">)</tt>                            <tt class="py-comment">#exibir o valor da fun&#231;&#227;o do menos brilhante</tt> </tt>
+</div></div><a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">     </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt id="link-17" class="py-name"><a title="FireFly.x" class="py-name" href="#" onclick="return doclink('link-17', 'x', 'link-1');">x</a></tt><tt class="py-op">=</tt><tt id="link-18" class="py-name" targets="Module FireFly=FireFly-module.html,Class FireFly.FireFly=FireFly.FireFly-class.html"><a title="FireFly
+FireFly.FireFly" class="py-name" href="#" onclick="return doclink('link-18', 'FireFly', 'link-18');">FireFly</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt id="link-19" class="py-name"><a title="FireFly.x" class="py-name" href="#" onclick="return doclink('link-19', 'x', 'link-1');">x</a></tt><tt class="py-op">.</tt><tt id="link-20" class="py-name" targets="Method FireFly.FireFly.calculate()=FireFly.FireFly-class.html#calculate"><a title="FireFly.FireFly.calculate" class="py-name" href="#" onclick="return doclink('link-20', 'calculate', 'link-20');">calculate</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th bgcolor="#70b0f0" class="navbar-select"
+          >&nbsp;&nbsp;&nbsp;Home&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Sep  6 16:00:41 2012
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>
