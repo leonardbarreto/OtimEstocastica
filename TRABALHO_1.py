@@ -10,8 +10,9 @@ import random as rdm
 import math
 
 def funcao(x):
-    ff = -(sum(fabs(x))*exp(-sum(x**2))) #sinal  negativo no início, pois queremos achar o mínimo da função
+    #ff = -(sum(fabs(x))*exp(-sum(x**2))) #sinal  negativo no início, pois queremos achar o mínimo da função
     #ff = -(sum(fabs(x))*exp(-sum(np.power(x,x))))   
+    ff = (((x[0]-1)*(x[0]-1))+((x[1]-1)*(x[1]-1))-x[0]*x[1])
     return ff
     
 def luus_jaakola(nint,nout,raios,contract,dimen):
@@ -135,9 +136,10 @@ CR=0.6
 F=1.5
 G=1000
 evolucao_diferencial2(NP,D,F,G,CR)
-nint=3
+nint=10
 nout=4
 contract=0.2
 dimen=2
 raios=rand(dimen)-2
+#raios=array([10,10])
 luus_jaakola(nint,nout,raios,contract,dimen)

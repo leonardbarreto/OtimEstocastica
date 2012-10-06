@@ -1,0 +1,16 @@
+SOLUÇÃO ANALÍTICA
+
+Quatro mínimos globais, com as seguintes coordenadas:
+(1/2,1/2);  (-1/2,1/2); (1/2;-1/2); (-1/2, -1/2)
+Com valor aproximado de:
+-0.60653065971263342
+
+Abordagens:
+	Filtro de soluções.
+	Perturbação da função.
+
+Testar:
+
+ROBUSTEZ: A quantidade de vezes invocadas e a quantidade de soluções (raízes) encontradas neste conjunto.
+TEMPO e PRECISÃO:
+	Testar se o desvio padrao das solucoes é menor do que 1, o que significa que o resultado é representativo.

@@ -16,7 +16,7 @@ class BuscaHarmonica:
     def __init__(self):
         _tx_improv=1        #Taxa de improvisação - possibilita a inserção de novas notas musicais na harmonia        
         self._tx_par=0.3    #Taxa referente à probabilidade de uma variável sofrer ajustes. RELAÇÃO COM OS VALORES DO INTERVALO
-        self._mi=10000         #número máximo de improvisos (número máximo de iterações ou gerações)
+        self._mi=10000      #número máximo de improvisos (número máximo de iterações ou gerações)
         self._tx_hmcr=0.5   #taxa de escolha de um valor da memória. RELAÇÃO COM OS VALORES DO INTERVALO [entre 0..1]
         self._fw=0.1        #Fret Width(tamanho da pertubação) - ajustes que podem ser realizados em uma variável de uma harmonia (elemento do vetor)
         self._hms=6         #Número de vetores presentes na memória harmônica
@@ -41,7 +41,9 @@ class BuscaHarmonica:
     
     def set_nova_harmonia(self,_p_nInst):
         _vnh=[]     #Novo vetor harmônico
-        _vnh.append(rand(_p_nInst)); #Nova harmonia com valores entre 0..1 de dimensão em relação _n_inst
+        #ALTERAR PARA ATRIBUIR OS VALORES ENTRE A FAIXA DE LIMITES DAS VARIÁVEIS (AQUI INSTRUMENTOS)...        
+        #_vnh.append(rand(_p_nInst)); #Nova harmonia com valores entre 0..1 de dimensão em relação _n_inst
+        _vnh.append(array([uniform(-2,2),uniform(-2,2)]))        
         self._v_nova_harmonia=_vnh
         
     def get_nova_harmonia(self):
