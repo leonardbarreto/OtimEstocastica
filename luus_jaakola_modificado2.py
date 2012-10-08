@@ -21,14 +21,14 @@ import numpy as np
 import time
 import random
 class LJ:
-    def __init__(self):
+    def __init__(self,pnout=50,pnint=20,pcon=0.05):
         self._x1=[] 
         self._x2=[] 
         self.raios=[]
         self._qtd_raizes=4
-        self._vnint=50
-        self._vnout=20
-        self._contract=0.05
+        self._vnint=pnint
+        self._vnout=pnout
+        self._contract=pcon
         self._dimensao=2
         self._limites=[]
         self._vet_raizes=[]
@@ -145,7 +145,8 @@ class LJ:
         print fim-ini
         arq=open('LJ_hirsch.txt','a')
         #Formato (nint, nout, contract, raiz, solução)            
-        arq.write('%f\n' %(fim-ini))
+        arq.write('%d %d %.2f %f\n' %(self._vnout, self._vnint, self._contract, fim-ini))        
+        #arq.write('%f\n' %(fim-ini))
         arq.close
     
     #fim=time.time()
@@ -158,28 +159,9 @@ class LJ:
         arq.close
     #grava_resultados()
     
-l=LJ()
-l.calculate()
-"""    
-    def filtro(self,tol):
-        print len(self._vet_raizes)
-        print self._vet_raizes
-        i=0
-        tam=len(self._vet_raizes)
-        while (i<tam):
-            print "Raiz %d " %i            
-            j=i+1
-            while (j<tam):
-                if (fabs(self._vet_raizes[i][0]-self._vet_raizes[j][0])<tol and fabs(self._vet_raizes[i][0]-self._vet_raizes[j][1])<tol):
-                    print self._vet_raizes[j]                    
-                    del self._vet_raizes[j]
-                    j=j-1                    
-                    tam=len(self._vet_raizes)
-                    print "!"
-                j=j+1
-            i=i+1
-            tam=len(self._vet_raizes)
-        print len(self._vet_raizes)
-        print self._vet_raizes
-"""
-    
+for no in [20,35,50,65]:
+    for ni in [30, 50, 70, 100]:
+        for c in [0.05, 0.1, 0.2]:
+            d=LJ(no,ni,c)
+            d.calculate()
+            del(d)

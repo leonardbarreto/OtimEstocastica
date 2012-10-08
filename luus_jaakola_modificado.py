@@ -23,13 +23,13 @@ import numpy as np
 import time
 import random
 class LJ:
-    def __init__(self):
+    def __init__(self,pnout=50,pnint=20,pcon=0.05):
         self._x1=[] 
         self._x2=[] 
         self.raios=[]
-        self._vnint=50
-        self._vnout=20
-        self._contract=0.05
+        self._vnint=pnint
+        self._vnout=pnout
+        self._contract=pcon
         self._execucoes=20
         self._tolerancia=0.1
         self._dimensao=2
@@ -94,12 +94,14 @@ class LJ:
                     self._vet_raizes[j][1]=0  #marcar como solução próxima
        
     def exibir_resultados(self):        
+        self._qtdraizes=0        
         for i in range(self._execucoes):
             if (self._vet_raizes[i][0]!=0):
+                self._qtdraizes=self._qtdraizes+1
                 print self._vet_raizes[i],self.funcao(self._vet_raizes[i])
                 arq=open('LJ.txt','a')
                 #Formato (nint, nout, contract, raiz, solução)            
-                arq.write('%15d %d %f %s %f\n' %(self._vnout, self._vnint, self._contract, self._vet_raizes[i], self.funcao(self._vet_raizes[i])))
+                arq.write('%30s %s %5s %f\n' %(' ', self._vet_raizes[i], ' ', self.funcao(self._vet_raizes[i])))
                 arq.close
                 
     def set_pontos(self,_l_sup,_l_inf):
@@ -128,8 +130,8 @@ class LJ:
         fim=time.time()
         print fim-ini
         arq=open('LJ.txt','a')
-        #Formato (nint, nout, contract, raiz, solução)            
-        arq.write('%f\n' %(fim-ini))
+        #Formato (nout, nint, contract, tempo, qtd de raizes)            
+        arq.write('%d %d %.2f %f %d\n' %(self._vnout, self._vnint, self._contract, fim-ini, self._qtdraizes))
         arq.close
     
     #fim=time.time()
@@ -144,28 +146,10 @@ class LJ:
         arq.close
     #grava_resultados()
     
-l=LJ()
-l.calculate()
-"""    
-    def filtro(self,tol):
-        print len(self._vet_raizes)
-        print self._vet_raizes
-        i=0
-        tam=len(self._vet_raizes)
-        while (i<tam):
-            print "Raiz %d " %i            
-            j=i+1
-            while (j<tam):
-                if (fabs(self._vet_raizes[i][0]-self._vet_raizes[j][0])<tol and fabs(self._vet_raizes[i][0]-self._vet_raizes[j][1])<tol):
-                    print self._vet_raizes[j]                    
-                    del self._vet_raizes[j]
-                    j=j-1                    
-                    tam=len(self._vet_raizes)
-                    print "!"
-                j=j+1
-            i=i+1
-            tam=len(self._vet_raizes)
-        print len(self._vet_raizes)
-        print self._vet_raizes
-"""
-    
+#Executar para diversos valores de atributos
+for no in [20,35,50,65]:
+    for ni in [30, 50, 70, 100]:
+        for c in [0.05, 0.1, 0.2]:
+            d=LJ(no,ni,c)
+            d.calculate()
+            del(d)

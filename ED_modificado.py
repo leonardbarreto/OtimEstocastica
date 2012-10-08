@@ -117,8 +117,10 @@ class ED:
                     self._vet_raizes[j][1]=0  #marcar como solução próxima    
     
     def exibir_resultados(self):        
+        self._qtdraiz=0        
         for i in range(self._execucoes):
             if (self._vet_raizes[i][0]!=0):
+                self._qtdraiz=self._qtdraiz+1
                 print self._vet_raizes[i],self.funcao(self._vet_raizes[i])
                 arq=open('DE.txt','a')
                 #Formato (número de gerações, número de pontos, vetor de raízes, valor da função)            
@@ -134,14 +136,14 @@ class ED:
         print fim-ini
         arq=open('DE.txt','a')
         #Formato (NP, CR, F, G, Tempo)            
-        arq.write('%d %.2f %.2f %d %f\n' %(self._NP, self._CR, self._F, self._G, fim-ini))
+        arq.write('%d %.2f %.2f %d %f %d\n' %(self._NP, self._CR, self._F, self._G, fim-ini, self._qtdraiz))
         arq.close
         
 #Executar para diversos valores de atributos
-for n in [10,20,30,40,50,60]:
+for n in [20,30,40,50]:
     for c in [0.2, 0.4, 0.6]:
         for f in [1.1, 1.3, 1.5, 1.7]:
-            for g in [10, 15, 20, 25]:
+            for g in [15, 20, 25]:
                 d=ED(n,c,f,g)
                 d.calculate()
                 del(d)
