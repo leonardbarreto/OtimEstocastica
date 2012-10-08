@@ -28,7 +28,7 @@ class ED:
         self._D=2
         self._CR=0.6
         self._F=1.5
-        self._G=30
+        self._G=50
         self._rho=0.9
         self._xp=0
         self._beta=10000
@@ -52,6 +52,9 @@ class ED:
         fp=self._beta*(exp(1)**(-(self._dist))*self._xp*(self._dist))
         ff=fo+fp        
         return ff
+    
+    def funcao2(self,x):
+        return -(sum(fabs(x))*exp(-(sum(x**2))))
     
     def evolucao_diferencial(self,NP,D,F,G,CR):
         #Entradas do problema
@@ -158,11 +161,12 @@ class ED:
     def exibir_resultados(self):        
         for i in range(self._execucoes):
             if (self._vet_raizes[i][0]!=0):
-                print self._vet_raizes[i],self.funcao(self._vet_raizes[i])
-#                arq=open('LJ.txt','a')
-                #Formato (nint, nout, contract, raiz, solução)            
- ##              arq.close    
-    
+                print self._vet_raizes[i],self.funcao2(self._vet_raizes[i])
+                #Gravando resultados em arquivo            
+                arq=open('DE_hirsch.txt','a')
+                #Formato (número de gerações, número de pontos, vetor de raízes, valor da função)            
+                arq.write('%15d %d %s %f\n' %(self._G, self._NP, self._vet_raizes[i], self.funcao2(self._vet_raizes[i])))
+                arq.close    
     
     def calculate(self):
         ini=time.time()        
@@ -171,10 +175,10 @@ class ED:
         self.exibir_resultados()
         fim=time.time()
         print fim-ini
-        #arq=open('LJ.txt','a')
+        arq=open('DE_hirsch.txt','a')
         #Formato (nint, nout, contract, raiz, solução)            
-        #arq.write('%f\n' %(fim-ini))
-        #arq.close
+        arq.write('%f\n' %(fim-ini))
+        arq.close
         
 d=ED()
 d.calculate()

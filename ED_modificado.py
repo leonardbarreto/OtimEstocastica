@@ -17,11 +17,11 @@ import random as rdm
 class ED:
     def __init__(self):
         self._tolerancia=0.2
-        self._NP=20
+        self._NP=50
         self._D=2
         self._CR=0.6
         self._F=1.5
-        self._G=30
+        self._G=15
         self._execucoes=50
         self._vet_raizes=[]
         self._vet_solucoes=[]
@@ -120,10 +120,11 @@ class ED:
         for i in range(self._execucoes):
             if (self._vet_raizes[i][0]!=0):
                 print self._vet_raizes[i],self.funcao(self._vet_raizes[i])
-#                arq=open('LJ.txt','a')
-                #Formato (nint, nout, contract, raiz, solução)            
- ##              arq.close    
-    
+                arq=open('DE.txt','a')
+                #Formato (número de gerações, número de pontos, vetor de raízes, valor da função)            
+                arq.write('%15d %d %s %f\n' %(self._G, self._NP, self._vet_raizes[i], self.funcao(self._vet_raizes[i])))
+                arq.close    
+                
     def calculate(self):
         ini=time.time()        
         self.get_solucoes()
@@ -131,10 +132,10 @@ class ED:
         self.exibir_resultados()
         fim=time.time()
         print fim-ini
-        #arq=open('LJ.txt','a')
+        arq=open('DE.txt','a')
         #Formato (nint, nout, contract, raiz, solução)            
-        #arq.write('%f\n' %(fim-ini))
-        #arq.close
+        arq.write('%f\n' %(fim-ini))
+        arq.close
         
 d=ED()
 d.calculate()
