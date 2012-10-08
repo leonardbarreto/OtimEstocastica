@@ -22,8 +22,10 @@ class FireFly:
     
     def funcao(self,x):
         """ Definição da função objetivo do problema proposto """
-        return -(sum(fabs(x))*exp(-sum(x**2))) # Minimizar (sinal negativo)
+        ff= -(sum(fabs(x))*exp(-sum(x**2))) # Minimizar (sinal negativo)
+        #ff=-((fabs(x[0])+fabs(x[1]))*exp(-(x[0]**2+x[1]**2)))    
         #return (x[0]**2)+x[1]
+        return ff
     def set_intensidade_emitida_de_luz(self,_pFflies):
         """ Criar e calcular a intensidade de emissão de luz de cada firefly. A intensidade de luz (Ii) de cada firefly (FFi) é determinado pelo valor f(xi). 
             Parâmetros:

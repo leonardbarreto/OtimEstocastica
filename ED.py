@@ -72,13 +72,13 @@ def evolucao_diferencial(NP,D,F,G,CR):
    return x[pos]
 
 ini=time.time()
-tol=0.1
+tol=0.2
 NP=40
 D=2
 CR=0.6
 F=1.5
 G=30
-execucoes=30
+execucoes=50
 vet_raizes=[]
 vet_solucoes=[]
 for i in range(execucoes):

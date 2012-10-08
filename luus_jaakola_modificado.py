@@ -27,10 +27,10 @@ class LJ:
         self._x1=[] 
         self._x2=[] 
         self.raios=[]
-        self._vnint=100
-        self._vnout=100
-        self._contract=0.01
-        self._execucoes=30
+        self._vnint=50
+        self._vnout=20
+        self._contract=0.05
+        self._execucoes=20
         self._tolerancia=0.1
         self._dimensao=2
         self._limites=[]
@@ -60,7 +60,7 @@ class LJ:
         
     def set_limites(self):
         #[min,max]    
-        self._limites=array([-6.,6.])
+        self._limites=array([-2.,2.])
         
     def set_raios(self):    
         self.raios=array([-0.5,0.5])#Cria array com duas posicões
@@ -97,7 +97,11 @@ class LJ:
         for i in range(self._execucoes):
             if (self._vet_raizes[i][0]!=0):
                 print self._vet_raizes[i],self.funcao(self._vet_raizes[i])
-        
+                arq=open('LJ.txt','a')
+                #Formato (nint, nout, contract, raiz, solução)            
+                arq.write('%15d %d %f %s %f\n' %(self._vnout, self._vnint, self._contract, self._vet_raizes[i], self.funcao(self._vet_raizes[i])))
+                arq.close
+                
     def set_pontos(self,_l_sup,_l_inf):
         """Configura as coordenadas de acordo com os valores limitantes estipulados"""
         n1=uniform(_l_inf,_l_sup)
@@ -123,6 +127,10 @@ class LJ:
         self.exibir_resultados()
         fim=time.time()
         print fim-ini
+        arq=open('LJ.txt','a')
+        #Formato (nint, nout, contract, raiz, solução)            
+        arq.write('%f\n' %(fim-ini))
+        arq.close
     
     #fim=time.time()
     #print fim-ini
@@ -137,6 +145,7 @@ class LJ:
     #grava_resultados()
     
 l=LJ()
+l.calculate()
 """    
     def filtro(self,tol):
         print len(self._vet_raizes)

@@ -142,3 +142,4 @@ class BuscaHarmonica:
         
    
 a=BuscaHarmonica()
+a.calculate()

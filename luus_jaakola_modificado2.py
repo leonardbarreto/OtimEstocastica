@@ -25,19 +25,19 @@ class LJ:
         self._x1=[] 
         self._x2=[] 
         self.raios=[]
-        self._vnint=70
-        self._vnout=15
-        self._contract=0.01
-        self._execucoes=20
-        self._tolerancia=0.1
+        self._qtd_raizes=4
+        self._vnint=50
+        self._vnout=20
+        self._contract=0.05
         self._dimensao=2
         self._limites=[]
         self._vet_raizes=[]
         self.set_raios()
         self.set_limites()
-        self._beta=100
-        self._ro=1.8
+        self._beta=100000
+        self._rho=0.6
         self._dist=2    #distância
+        self._xp=0
         
     def funcao(self,x):
         """ Funcao adaptada para a técnica de penalização de funções. Variáveis:
@@ -47,18 +47,26 @@ class LJ:
             fo - função original
             fp - função perturbação
         """
-        if (self._dist<=self._ro):
-            xp=1
+        if (len(self._vet_raizes)==1):    #não computa para a primeira raiz    
+            self._xp=0
         else:
-            xp=0
+            if (self.ponto_proximo(x)==True):
+                self._xp=1
+            else:
+                self._xp=0
+        
         fo=-((fabs(x[0])+fabs(x[1]))*exp(-(x[0]**2+x[1]**2)))
-        fp=(exp(1)**(-(self._dist))*xp*(self._dist))
+        fp=self._beta*(exp(1)**(-(self._dist))*self._xp*(self._dist))
         ff=fo+fp
+        return ff
+        
+    def funcao2(self,x):
+        ff=-((fabs(x[0])+fabs(x[1]))*exp(-(x[0]**2+x[1]**2)))
         return ff
         
     def set_limites(self):
         #[min,max]    
-        self._limites=array([-6.,6.])
+        self._limites=array([-2.,2.])
         
     def set_raios(self):    
         self.raios=array([-0.5,0.5])#Cria array com duas posicões
@@ -70,22 +78,27 @@ class LJ:
         self._limites[1]=self._limites[1]-(self._limites[1]*self._contract)
         #print self._limites
         
-    def get_solucoes(self):
-        #ini=time.time()
-        for k in range(self._execucoes):
-            self._vet_raizes.append(rand(self._dimensao))
-            self.set_limites()            
+    def get_raizes(self):
+        for k in range(self._qtd_raizes):
             vx0=self.set_pontos(self._limites[0],self._limites[1]) #escolhe um ponto dentre os limites estabelecidos
-            if (k>0):
-                self._dist=self.dist_euclideana(self._vet_raizes[k-1],self._vet_raizes[k])
-                #print self._dist
-            self._vet_raizes[k]=self.luus_jaakola(vx0,self._vnout,self._vnint,self.raios,self._contract,2)
-            print self._vet_raizes[k],self.funcao(self._vet_raizes[k])
+            if (len(self._vet_raizes)>0):
+                while (self.ponto_proximo(vx0)==True):   #Escolher um ponto inicial q nao seja uma raiz          
+                    vx0=self.set_pontos(self._limites[0],self._limites[1]) #escolhe um ponto dentre os limites estabelecidos
+                    #self.ponto_proximo(vx0)
+            self._vet_raizes.append(vx0)
+            self._vet_raizes[k]=self.luus_jaakola(vx0,self._vnout,self._vnint,self.raios,self._contract,2)            
+            print "Raiz " ,k,self._vet_raizes[k]
             
     def exibir_resultados(self):        
-        for i in range(self._execucoes):
-            if (self._vet_raizes[i][0]!=0):
-                print self._vet_raizes[i],self.funcao(self._vet_raizes[i])
+        self._xp=0  #desligar a chave        
+        for i in range(self._qtd_raizes):
+            print self._vet_raizes[i],self.funcao2(self._vet_raizes[i])
+            #Gravando resultados em arquivo            
+            arq=open('LJ_hirsch.txt','a')
+            #Formato (nint, nout, contract, raiz, solução)            
+            arq.write('%15d %d %f %s %f\n' %(self._vnout, self._vnint, self._contract, self._vet_raizes[i], self.funcao2(self._vet_raizes[i])))
+            arq.close
+            
         
     def set_pontos(self,_l_sup,_l_inf):
         """Configura as coordenadas de acordo com os valores limitantes estipulados"""
@@ -94,12 +107,22 @@ class LJ:
         _pt=array([n1,n2])
         return _pt
     
+    def ponto_proximo(self,vetx):
+        """ Retona True(1) se existe uma raiz próxima a este vetor passado como parâmetro"""
+        self._dist=0        
+        resp = False
+        for j in range(0,len(self._vet_raizes)-1):
+            self._dist=self._dist+self.dist_euclideana(vetx,self._vet_raizes[j])
+            if (self._dist<self._rho):   #Se ponto próximo, ativar a variável para perturbar a função
+                resp = True
+        return resp
+
     def luus_jaakola(self,x0,nout,nint,raios,contract,dimen):
         #x0 = rand(dimen) #x0 é um vetor de tamanho dimen
         for i in range(nout):
             for j in range(nint):
                 novox = x0 + raios*(rand(dimen)-0.5)
-                if self.funcao(novox)<self.funcao(x0):
+                if (self.funcao(novox)<self.funcao(x0)):
                     x0=novox
             raios = (1-contract)*raios
             self.atualizar_limites()
@@ -107,26 +130,29 @@ class LJ:
     
     def dist_euclideana(self,p,q):
         """ Norma L2 """
+        res=0
         for i in range(self._dimensao):
-            res=sqrt(sum((p-q)**2))
+            res=(sum((p-q)**2))
         #soma= sqrt(((p[0]-q[0])**2)+((p[1]-q[1])**2))
-        return res
+        return sqrt(res)
         
         
     def calculate(self):
         ini=time.time()        
-        self.get_solucoes()
-        #self.exibir_resultados()
+        self.get_raizes()
+        self.exibir_resultados()
         fim=time.time()
         print fim-ini
+        arq=open('LJ_hirsch.txt','a')
+        #Formato (nint, nout, contract, raiz, solução)            
+        arq.write('%f\n' %(fim-ini))
+        arq.close
     
     #fim=time.time()
     #print fim-ini
     #raios - espaço de busca
     def grava_resultados():
         arq=open('teste.txt','a')
-        x=19.9
-        y=1.5
         arq.write('Valores: %f %f' %(x, y))
         arq.write('%s' %vet_solucoesfinal)
         arq.close
