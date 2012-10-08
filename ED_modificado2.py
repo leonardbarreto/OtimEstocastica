@@ -22,13 +22,13 @@ import numpy as np
 import time
 import random as rdm
 class ED:
-    def __init__(self):
+    def __init__(self,NP=50,CR=0.6,F=1.5,G=15):
         self._tolerancia=0.2
-        self._NP=50
+        self._NP=NP
         self._D=2
-        self._CR=0.6
-        self._F=1.5
-        self._G=50
+        self._CR=CR
+        self._F=F
+        self._G=G
         self._rho=0.9
         self._xp=0
         self._beta=10000
@@ -165,7 +165,8 @@ class ED:
                 #Gravando resultados em arquivo            
                 arq=open('DE_hirsch.txt','a')
                 #Formato (número de gerações, número de pontos, vetor de raízes, valor da função)            
-                arq.write('%15d %d %s %f\n' %(self._G, self._NP, self._vet_raizes[i], self.funcao2(self._vet_raizes[i])))
+                #arq.write('%15d %d %s %f\n' %(self._G, self._NP, self._vet_raizes[i], self.funcao2(self._vet_raizes[i])))
+                arq.write('%30s %s %3s %.6f\n' %(' ', self._vet_raizes[i], ' ', self.funcao2(self._vet_raizes[i])))                
                 arq.close    
     
     def calculate(self):
@@ -177,8 +178,16 @@ class ED:
         print fim-ini
         arq=open('DE_hirsch.txt','a')
         #Formato (nint, nout, contract, raiz, solução)            
-        arq.write('%f\n' %(fim-ini))
+        #arq.write('%f\n' %(fim-ini))
+        arq.write('%d %.2f %.2f %d %f\n' %(self._NP, self._CR, self._F, self._G, fim-ini))
         arq.close
         
-d=ED()
-d.calculate()
+#Executar para diversos valores de atributos
+for n in [10,20,30,40,50,60]:
+    for c in [0.2, 0.4, 0.6]:
+        for f in [1.1, 1.3, 1.5, 1.7]:
+            for g in [10, 15, 20, 25]:
+                d=ED(n,c,f,g)
+                d.calculate()
+                del(d)
+

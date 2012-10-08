@@ -9,6 +9,8 @@ Abordagens:
 	Filtro de soluções.
 	Perturbação da função.
 
+Escolha dos parâmetros:
+
 Testar:
 
 ROBUSTEZ: A quantidade de vezes invocadas e a quantidade de soluções (raízes) encontradas neste conjunto.
