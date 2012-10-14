@@ -96,7 +96,7 @@ class LJ:
             #Gravando resultados em arquivo            
             arq=open('LJ_hirsch.txt','a')
             #Formato (nint, nout, contract, raiz, solução)            
-            arq.write('%15d %d %f %s %f\n' %(self._vnout, self._vnint, self._contract, self._vet_raizes[i], self.funcao2(self._vet_raizes[i])))
+            arq.write('%30d %d %f %s %f\n' %(self._vnout, self._vnint, self._contract, self._vet_raizes[i], self.funcao2(self._vet_raizes[i])))
             arq.close
             
         
@@ -159,9 +159,15 @@ class LJ:
         arq.close
     #grava_resultados()
     
-for no in [20,35,50,65]:
-    for ni in [30, 50, 70, 100]:
-        for c in [0.05, 0.1, 0.2]:
-            d=LJ(no,ni,c)
-            d.calculate()
-            del(d)
+for i in range(30):
+    d=LJ(20,30,0.1)
+    d.calculate()
+    del(d)
+
+
+#for no in [20,35,50,65]:
+#    for ni in [30, 50, 70, 100]:
+#        for c in [0.05, 0.1, 0.2]:
+#            d=LJ(no,ni,c)
+#            d.calculate()
+#            del(d)

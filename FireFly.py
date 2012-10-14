@@ -16,9 +16,11 @@ class FireFly:
         self._qtd_fireflies=6
         self._gama=uniform(0.01,100)    #coeficiente (real) de absorçao de luz pelo meio
         self._alfa=(float)(rand(1))     #parâmetro de randomização para a movimentação de um firefly
-        self._n_geracoes=1000           #número de gerações
+        self._n_geracoes=100          #número de gerações
         self._beta0=1                   #Atratividade para distância r=0
+        self.set_limites()        
         self.set_populacao_inicial(self._dimen,self._qtd_fireflies)
+        
     
     def funcao(self,x):
         """ Definição da função objetivo do problema proposto """
@@ -26,6 +28,7 @@ class FireFly:
         #ff=-((fabs(x[0])+fabs(x[1]))*exp(-(x[0]**2+x[1]**2)))    
         #return (x[0]**2)+x[1]
         return ff
+        
     def set_intensidade_emitida_de_luz(self,_pFflies):
         """ Criar e calcular a intensidade de emissão de luz de cada firefly. A intensidade de luz (Ii) de cada firefly (FFi) é determinado pelo valor f(xi). 
             Parâmetros:
@@ -36,6 +39,19 @@ class FireFly:
     def get_intensidade_emitida_de_luz(self):
         return self._luminosidade
     
+    def set_pontos(self,_l_sup,_l_inf):
+        """Configura as coordenadas de acordo com os valores limitantes estipulados"""
+        n1=uniform(_l_inf,_l_sup)
+        n2=uniform(_l_inf,_l_sup)        
+        _pt=array([n1,n2])
+        return _pt    
+    
+    def set_limites(self):
+        self._limites=array([-2.,2.]) #[min,max] 
+
+    def get_limites(self):
+        return self._limites        
+        
     def calcular_fator_de_atratividade(self):
         """ Calcular o fator de atratividade entre os firefly mais brilhante e o menos brilhante.
             Requisitos:
@@ -63,9 +79,11 @@ class FireFly:
                 - _p_dimen -> dimensão do problema
                 - _p_qtdff -> Quantidade de fireflies do problema
         """        
+        self.get_limites()
         self._luminosidade=[]
         for i in range(_p_qtdff):               #criar quantidade de fireflies definida...
             self._fFlies.append(rand(_p_dimen)) #...atribuindo valores reais para cada um entre 0..1
+            #self._fFlies.append(self.set_pontos(self._limites[0],self._limites[1]))            
             self._luminosidade.append(0)          #criando um vetor nulo para armazenar informações sobre a luminosidade de cada firefly
         self.set_intensidade_emitida_de_luz(self._fFlies)
         
@@ -86,7 +104,7 @@ class FireFly:
         _vMab=self.funcao(_p_iel[0])    # valor do mais brilhante
         for i in range(1,self._qtd_fireflies):
             _v=self.funcao(_p_iel[i])            
-            if (_v>_pMab):
+            if (_v>_vMab):
                 _pMab=i
                 _vMab=_v
         return _pMab
@@ -102,7 +120,7 @@ class FireFly:
         _vmeb=self.funcao(_p_iel[0])    # valor do mais brilhante
         for i in range(1,self._qtd_fireflies):
             _v=self.funcao(_p_iel[i])            
-            if (_v<_pmeb):
+            if (_v<_vmeb):
                 _pmeb=i
                 _vmeb=_v
         return _pmeb
@@ -130,7 +148,7 @@ class FireFly:
                         self.set_movimentar_firefly(i,j)
                     self.set_intensidade_emitida_de_luz(self._fFlies)   #Atualizar luminosidade de todos os vagalumes
         _mb=self.get_menos_brilhante(self._luminosidade)                #pegar a posição do  menos brilhante
-        print self.funcao(self._fFlies[_mb])                            #exibir o valor da função do menos brilhante
+        print self._fFlies[_mb],self.funcao(self._fFlies[_mb])                            #exibir o valor da função do menos brilhante
     
 x=FireFly()
 x.calculate()

@@ -139,11 +139,16 @@ class ED:
         arq.write('%d %.2f %.2f %d %f %d\n' %(self._NP, self._CR, self._F, self._G, fim-ini, self._qtdraiz))
         arq.close
         
+for i in range(30):
+    d=ED(40,0.2,1.1,20)
+    d.calculate()
+    del(d)
+
 #Executar para diversos valores de atributos
-for n in [20,30,40,50]:
-    for c in [0.2, 0.4, 0.6]:
-        for f in [1.1, 1.3, 1.5, 1.7]:
-            for g in [15, 20, 25]:
-                d=ED(n,c,f,g)
-                d.calculate()
-                del(d)
+#for n in [20,30,40,50]:
+#    for c in [0.2, 0.4, 0.6]:
+#        for f in [1.1, 1.3, 1.5, 1.7]:
+#            for g in [15, 20, 25]:
+#                d=ED(n,c,f,g)
+#                d.calculate()
+#                del(d)

@@ -30,7 +30,7 @@ class LJ:
         self._vnint=pnint
         self._vnout=pnout
         self._contract=pcon
-        self._execucoes=20
+        self._execucoes=30
         self._tolerancia=0.1
         self._dimensao=2
         self._limites=[]
@@ -39,8 +39,8 @@ class LJ:
         self.set_limites()
         
     def funcao(self,x):
-        #ff = -(fabs(sum(x))*exp(-sum(x**2)))
-        ff=-((fabs(x[0])+fabs(x[1]))*exp(-(x[0]**2+x[1]**2)))    
+        ff = -(sum(fabs(x))*exp(-sum(x**2)))
+        #ff=-((fabs(x[0])+fabs(x[1]))*exp(-(x[0]**2+x[1]**2)))    
         #ff=((x[0] - x[1])**2 + (x[0]**2 + x[1]**2 - 1)**2)
         
         #ff = (x[0]**3 - 3*x[0]**2 - x[1] + 2)**2 + ((x[0] - 1)**2 + x[1]**2 - 4)**2 #FUNCÃO
@@ -52,24 +52,21 @@ class LJ:
         #minimo = (-0.8477591; -0.7653669)
         return ff
     
-    def funcao2(self,x):
-        """ Funcao adaptada para a técnica de penalização de funções. Variáveis:
-            β (beta) =  constante suficientemente grande
-            ρ (ro) = constante pequena
-            δ (delta) = distância entre coordenadas """
-        
     def set_limites(self):
         #[min,max]    
         self._limites=array([-2.,2.])
         
     def set_raios(self):    
-        self.raios=array([-0.5,0.5])#Cria array com duas posicões
+        #self.raios=array([-0.5,0.5])#Cria array com duas posicões
+        self.raios=1
         return self.raios
         
     def atualizar_limites(self):
         """Contrair os limites das variáveis em relação à contração da área de busca """
-        self._limites[0]=self._limites[0]-(self._limites[0]*self._contract)
-        self._limites[1]=self._limites[1]-(self._limites[1]*self._contract)
+        for k in range(self._dimensao):        
+            self._limites=self._limites-(self._limites*self._contract)
+        #self._limites[0]=self._limites[0]-(self._limites[0]*self._contract)
+        #self._limites[1]=self._limites[1]-(self._limites[1]*self._contract)
         #print self._limites
         
     def get_solucoes(self):
@@ -146,10 +143,14 @@ class LJ:
         arq.close
     #grava_resultados()
     
+for i in range(30):
+    d=LJ(20,30,0.1)
+    d.calculate()
+    del(d)
 #Executar para diversos valores de atributos
-for no in [20,35,50,65]:
-    for ni in [30, 50, 70, 100]:
-        for c in [0.05, 0.1, 0.2]:
-            d=LJ(no,ni,c)
-            d.calculate()
-            del(d)
+#for no in [20,35,50,65]:
+#    for ni in [30, 50, 70, 100]:
+#        for c in [0.05, 0.1, 0.2]:
+#            d=LJ(no,ni,c)
+#            d.calculate()
+#            del(d)

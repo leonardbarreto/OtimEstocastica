@@ -13,21 +13,27 @@ class BuscaHarmonica:
             -Funcao objetivo (fo)
             -Número de variáveis de decisao (N)
     """
-    def __init__(self):
+    def __init__(self,p_txpar=0.3,p_mi=10000,p_txhmcr=0.5,p_fw=0.1):
         _tx_improv=1        #Taxa de improvisação - possibilita a inserção de novas notas musicais na harmonia        
-        self._tx_par=0.2    #Taxa referente à probabilidade de uma variável sofrer ajustes. RELAÇÃO COM OS VALORES DO INTERVALO
-        self._mi=10000      #número máximo de improvisos (número máximo de iterações ou gerações)
-        self._tx_hmcr=0.5   #taxa de escolha de um valor da memória. RELAÇÃO COM OS VALORES DO INTERVALO [entre 0..1]
-        self._fw=0.1        #Fret Width(tamanho da pertubação) - ajustes que podem ser realizados em uma variável de uma harmonia (elemento do vetor)
-        self._hms=6         #Número de vetores presentes na memória harmônica
+        self._tx_par=0.3    #Taxa referente à probabilidade de uma variável sofrer ajustes. RELAÇÃO COM OS VALORES DO INTERVALO
+        self._mi=100      #número máximo de improvisos (número máximo de iterações ou gerações)
+        self._tx_hmcr=0.3   #taxa de escolha de um valor da memória. RELAÇÃO COM OS VALORES DO INTERVALO [entre 0..1]
+        self._fw=0.2        #Fret Width(tamanho da pertubação) - ajustes que podem ser realizados em uma variável de uma harmonia (elemento do vetor)
+        self._hms=10         #Número de vetores presentes na memória harmôniaca
         self._n_inst=2      #Número de instrumentos na memória harmônica - similar a dimensão do problema (quantidade de variáveis do problema)
+        self._tolerancia=0.9
+        self._vet_raizes=[]
+        self._execucoes=50
+        self.set_limites()        
         self.set_memoria_harmonica(self._hms,self._n_inst)
         self.set_nova_harmonia(self._n_inst)        
         
     def funcao(self,x):
         """ Definição da função objetivo do problema proposto """
-        return -(sum(fabs(x))*exp(-sum(x**2))) # Minimizar (sinal negativo)
-    
+        ff=-((fabs(x[0])+fabs(x[1]))*exp(-(x[0]**2+x[1]**2)))
+        return ff
+        #return -(sum(fabs(x))*exp(-sum(x**2))) # Minimizar (sinal negativo)
+            
     def grafico(self):
         entrada = pylab.arange(0, 20, 1)
         saida=self.funcao(entrada)
@@ -43,9 +49,23 @@ class BuscaHarmonica:
         _vnh=[]     #Novo vetor harmônico
         #ALTERAR PARA ATRIBUIR OS VALORES ENTRE A FAIXA DE LIMITES DAS VARIÁVEIS (AQUI INSTRUMENTOS)...        
         #_vnh.append(rand(_p_nInst)); #Nova harmonia com valores entre 0..1 de dimensão em relação _n_inst
-        _vnh.append(array([uniform(-2,2),uniform(-2,2)]))        
+        #_vnh.append(array([uniform(-2,2),uniform(-2,2)]))        
+        _vnh.append(self.set_pontos(self._limites[0],self._limites[1]))
         self._v_nova_harmonia=_vnh
-        
+    
+    def set_pontos(self,_l_sup,_l_inf):
+        """Configura as coordenadas de acordo com os valores limitantes estipulados"""
+        n1=uniform(_l_inf,_l_sup)
+        n2=uniform(_l_inf,_l_sup)        
+        _pt=array([n1,n2])
+        return _pt
+    
+    def set_limites(self):
+        self._limites=array([-2.,2.]) #[min,max]
+    
+    def get_limites(self):
+        return self._limites
+    
     def get_nova_harmonia(self):
         return self._v_nova_harmonia
                 
@@ -57,9 +77,8 @@ class BuscaHarmonica:
         """        
         _vh=[]                          #vetor harmônico
         for i in range(_pHms):
-            _vh.append(rand(_pNinst))
-            for j in range(_pNinst):
-                _vh[i][j]=uniform(-2,2)
+            #_vh.append(rand(_pNinst)) #Cria valores reais entre 0..1
+            _vh.append(self.set_pontos(self._limites[0],self._limites[1]))
         self._mHarm=_vh
         #return self._mHarm
     
@@ -71,18 +90,19 @@ class BuscaHarmonica:
             Parãmetros:
                 - _pHmcr-> taxa de escolha de um valor da memória
                 - _pFw  -> taxa da pertubacao de uma harmonia
-                - _pHms -> 
+                - _pHms -> Número de vetores presentes na memória harmônica
         """
         _r=uniform(-1,1)                    #escolha aleatória de reais entre -1 e 1
         for j in range(self._n_inst):
             _iAle=randint(0,_pHms)          #escolha aleatória de uma harmonia da memória harmônica (linha de uma matriz)            
+            #if (self._mHarm[_iAle][j]<=self._tx_hmcr):
             if (float(rand(1))<=self._tx_hmcr):
                 self._v_nova_harmonia[0][j]=self._mHarm[_iAle][j]
+                #if (self._mHarm[_iAle][j]<=self._tx_par): #
                 if (float(rand(1))<=self._tx_par): 
                     self._v_nova_harmonia[0][j]=self._v_nova_harmonia[0][j]+_r*self._fw
             else:
-                #self._v_nova_harmonia[0][j]=float(rand(1)) #valores reais aleatórios entre 0..1
-                self._v_nova_harmonia[0][j]=float(uniform(-2,2)) #valores reais aleatórios entre 0..1
+                self._v_nova_harmonia[0][j]=uniform(self._limites[0],self._limites[1]) #valores reais aleatórios entre 0..1
         return self._v_nova_harmonia
             
     def atualizar_memoria_harmonica(self,_pNovaHarmonia):
@@ -98,7 +118,7 @@ class BuscaHarmonica:
         return self._melhorHarmonia
     
     def pior_harmonia(self,_pHarm):
-        """ Calcula a pior harmonia da memória harmônica.
+        """ Retorna a pior harmonia da memória harmônica.
             Parâmetros:
                 - _pHarm -> memória harmônica
             Retorno:
@@ -133,15 +153,50 @@ class BuscaHarmonica:
                 _mPh=i
         return _pHarm[_mPh],_mH
     
+    def get_solucoes(self):
+        """ Obter k raízes em função da quantidade de execuções estabelecidas """
+        #ini=time.time()
+        for k in range(self._execucoes):
+            self._vet_raizes.append(rand(self._n_inst))
+            for i in range(self._mi): #até o número máximo de iterações        
+                self.set_nova_harmonia(self._n_inst)            
+                self.improvisar_nova_memoria(self._tx_hmcr,self._fw,self._hms)
+                self.atualizar_memoria_harmonica(self._v_nova_harmonia)
+            self._vet_raizes[k]=self.melhor_harmonia(self._mHarm)[0]
+    
+    def filtro(self):
+        """ Elimina as piores raízes repetidas."""         
+        #FILTRO NOS PONTOS: eliminar as raízes que dão aproximadamente o mesmo valor de f(x)
+        for i in range((self._execucoes)-1):
+            for j in range(i+1,self._execucoes):
+                if ((fabs(self._vet_raizes[i][0]-self._vet_raizes[j][0])<self._tolerancia) and (fabs(self._vet_raizes[i][1]- self._vet_raizes[j][1])<self._tolerancia)):
+                    if (self.funcao(self._vet_raizes[j])<self.funcao(self._vet_raizes[i])): #Se a raiz j é a melhor, copiá-la para i
+                        self._vet_raizes[i][0]=self._vet_raizes[j][0]  
+                        self._vet_raizes[i][1]=self._vet_raizes[j][1]  
+                    self._vet_raizes[j][0]=0  #marcar como solução próxima
+                    self._vet_raizes[j][1]=0  #marcar como solução próxima
+    
+    def exibir_resultados(self):        
+        self._qtdraiz=0        
+        for i in range(self._execucoes):
+            if (self._vet_raizes[i][0]!=0):
+                self._qtdraiz=self._qtdraiz+1
+                print self._vet_raizes[i],self.funcao(self._vet_raizes[i])
+                #arq=open('DE.txt','a')
+                #Formato (número de gerações, número de pontos, vetor de raízes, valor da função)            
+                #arq.write('%30s %s %3s %.6f\n' %(' ', self._vet_raizes[i], ' ', self.funcao(self._vet_raizes[i])))
+                #arq.close        
+#    def calculate(self):
+#        """ Método responsavel por realizar o cálculo """
+#        for k in range(self._mi): #até o número máximo de iterações        
+#            self.set_nova_harmonia(self._n_inst)            
+#            self.improvisar_nova_memoria(self._tx_hmcr,self._fw,self._hms)
+#            self.atualizar_memoria_harmonica(self._v_nova_harmonia)
+#        return self.melhor_harmonia(self._mHarm)
     def calculate(self):
-        """ Método responsavel por realizar o cálculo """
-        for k in range(self._mi): #até o número máximo de iterações        
-            self.set_nova_harmonia(self._n_inst)            
-            self.improvisar_nova_memoria(self._tx_hmcr,self._fw,self._hms)
-            self.atualizar_memoria_harmonica(self._v_nova_harmonia)
-        print self.melhor_harmonia(self._mHarm)        
-        return self.melhor_harmonia(self._mHarm)
-        
+        self.get_solucoes()
+        self.filtro()
+        self.exibir_resultados()
    
 a=BuscaHarmonica()
 a.calculate()
