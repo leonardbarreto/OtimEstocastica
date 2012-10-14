@@ -13,10 +13,10 @@ class FireFly:
     def __init__(self):
         self._fFlies=[]                 #população de fireflies        
         self._dimen=2                   #dimensão do problema
-        self._qtd_fireflies=6
+        self._qtd_fireflies=50
         self._gama=uniform(0.01,100)    #coeficiente (real) de absorçao de luz pelo meio
         self._alfa=(float)(rand(1))     #parâmetro de randomização para a movimentação de um firefly
-        self._n_geracoes=100          #número de gerações
+        self._n_geracoes=20          #número de gerações
         self._beta0=1                   #Atratividade para distância r=0
         self.set_limites()        
         self.set_populacao_inicial(self._dimen,self._qtd_fireflies)
@@ -82,8 +82,8 @@ class FireFly:
         self.get_limites()
         self._luminosidade=[]
         for i in range(_p_qtdff):               #criar quantidade de fireflies definida...
-            self._fFlies.append(rand(_p_dimen)) #...atribuindo valores reais para cada um entre 0..1
-            #self._fFlies.append(self.set_pontos(self._limites[0],self._limites[1]))            
+            #self._fFlies.append(rand(_p_dimen)) #...atribuindo valores reais para cada um entre 0..1
+            self._fFlies.append(self.set_pontos(self._limites[0],self._limites[1]))
             self._luminosidade.append(0)          #criando um vetor nulo para armazenar informações sobre a luminosidade de cada firefly
         self.set_intensidade_emitida_de_luz(self._fFlies)
         

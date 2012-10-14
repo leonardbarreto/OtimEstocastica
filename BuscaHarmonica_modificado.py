@@ -8,7 +8,7 @@ import numpy as np
 import pylab
 
 class BuscaHarmonica:
-    """ Algoritmo de otimização e busca baseado em perfomance musical.
+    """ Algoritmo de otimização e busca baseado em perfomance musical. Busca de múltiplos ótimos baseado no conceito de filtro de raízes.
         Parâmetros:
             -Funcao objetivo (fo)
             -Número de variáveis de decisao (N)
