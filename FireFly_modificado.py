@@ -3,6 +3,7 @@
 Created on Thu Sep  6 07:31:46 2012
 
 @author: leonard
+Algoritmo Firefly modificado para encontrar múltiplos ótimos globais
 """
 
 class FireFly:
@@ -13,11 +14,12 @@ class FireFly:
     def __init__(self):
         self._fFlies=[]               #população de fireflies        
         self._dimen=2                 #dimensão do problema
-        self._qtd_fireflies=30
+        self._qtd_fireflies=50
         self._gama=uniform(0.01,100)  #coeficiente (real) de absorçao de luz pelo meio
         self._alfa=(float)(rand(1))   #parâmetro de randomização para a movimentação de um firefly
         self._n_geracoes=10          #número de gerações
         self._beta0=1                #Atratividade para distância r=0
+        self._tolerancia=0.1
         self.set_limites()        
         self.set_populacao_inicial(self._dimen,self._qtd_fireflies)
         
@@ -48,9 +50,10 @@ class FireFly:
     
     def set_limites(self):
         self._limites=array([-2.,2.]) #[min,max] 
+        return self._limites
 
-    def get_limites(self):
-        return self._limites        
+    #def get_limites(self):
+    #    return self._limites        
         
     def calcular_fator_de_atratividade(self):
         """ Calcular o fator de atratividade entre os firefly mais brilhante e o menos brilhante.
@@ -79,7 +82,7 @@ class FireFly:
                 - _p_dimen -> dimensão do problema
                 - _p_qtdff -> Quantidade de fireflies do problema
         """        
-        self.get_limites()
+        self.set_limites()
         self._luminosidade=[]
         for i in range(_p_qtdff):               #criar quantidade de fireflies definida...
             #self._fFlies.append(rand(_p_dimen)) #...atribuindo valores reais para cada um entre 0..1
@@ -141,14 +144,35 @@ class FireFly:
        # rij - Distãncia r entre o firefly(i) e o firefly(j)
         
     def calculate(self):
+        self.vet_solucoes=[]        
         for k in range(self._n_geracoes):
+            self.set_limites()
+            self.set_populacao_inicial(self._dimen,self._qtd_fireflies)
             for i in range(self._qtd_fireflies):
                 for j in range(i,self._qtd_fireflies):
-                    if (self._luminosidade[j]<self._luminosidade[i]): #Se algum firef
+                    if (self._luminosidade[j]>self._luminosidade[i]): #Se algum firef
                         self.set_movimentar_firefly(i,j)
                     self.set_intensidade_emitida_de_luz(self._fFlies)   #Atualizar luminosidade de todos os vagalumes
-        _mb=self.get_menos_brilhante(self._luminosidade)                #pegar a posição do  menos brilhante
-        print self._fFlies[_mb],self.funcao(self._fFlies[_mb])                            #exibir o valor da função do menos brilhante
-    
+            _mb=self.get_menos_brilhante(self._luminosidade)                #pegar a posição do  menos brilhante
+            #salvando em um vetor de soluções
+            self.vet_solucoes.append(rand(self._dimen))            
+            self.vet_solucoes[k]=self._fFlies[_mb]
+
+    def filtro(self):
+        for i in range((self._n_geracoes)-1):
+            for j in range(i+1,self._n_geracoes):
+                if ((fabs(self.vet_solucoes[i][0]-self.vet_solucoes[j][0])<self._tolerancia) and (fabs(self.vet_solucoes[i][1]- self.vet_solucoes[j][1])<self._tolerancia)):
+                    if (self.funcao(self.vet_solucoes[j])<(self.funcao(self.vet_solucoes[i]))): #Se a raiz j é a melhor, copiá-la para i
+                        self.vet_solucoes[i][0]=self.vet_solucoes[j][0]  
+                        self.vet_solucoes[i][1]=self.vet_solucoes[j][1]  
+                    self.vet_solucoes[j][0]=0  #marcar como solução próxima
+                    self.vet_solucoes[j][1]=0  #marcar como solução próxima        
+                           
+    def exibir_resultados(self):
+        for i in range(len(self.vet_solucoes)):
+            print self.vet_solucoes[i]
+
 x=FireFly()
 x.calculate()
+x.filtro()
+x.exibir_resultados()
