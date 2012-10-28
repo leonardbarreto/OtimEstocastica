@@ -16,7 +16,7 @@ class BuscaHarmonica:
     def __init__(self,p_txpar=0.3,p_mi=10000,p_txhmcr=0.5,p_fw=0.1):
         _tx_improv=1        #Taxa de improvisação - possibilita a inserção de novas notas musicais na harmonia        
         self._tx_par=0.3    #Taxa referente à probabilidade de uma variável sofrer ajustes. RELAÇÃO COM OS VALORES DO INTERVALO
-        self._mi=100      #número máximo de improvisos (número máximo de iterações ou gerações)
+        self._mi=1000      #número máximo de improvisos (número máximo de iterações ou gerações)
         self._tx_hmcr=0.3   #taxa de escolha de um valor da memória. RELAÇÃO COM OS VALORES DO INTERVALO [entre 0..1]
         self._fw=0.2        #Fret Width(tamanho da pertubação) - ajustes que podem ser realizados em uma variável de uma harmonia (elemento do vetor)
         self._hms=10         #Número de vetores presentes na memória harmôniaca
@@ -30,7 +30,18 @@ class BuscaHarmonica:
         
     def funcao(self,x):
         """ Definição da função objetivo do problema proposto """
-        ff=-((fabs(x[0])+fabs(x[1]))*exp(-(x[0]**2+x[1]**2)))
+        #ff=-((fabs(x[0])+fabs(x[1]))*exp(-(x[0]**2+x[1]**2)))
+        #parâmetros da função        
+        a=0.5
+        b=0.8
+        c=0.3
+        kp=604500
+        P=0.00243        
+        try:
+            ff=(a-((c+2*x[0])**2*(a+b+c-2*x[0])**2)/(x[1])-x[0])**2 + (x[1]-kp*P**2*(b-3*x[0])**3)**2
+        except ZeroDivisionError:
+            x[0]=0 #Condição do problema
+            x[1]=-1 #Condição do problema
         return ff
         #return -(sum(fabs(x))*exp(-sum(x**2))) # Minimizar (sinal negativo)
             
@@ -61,7 +72,7 @@ class BuscaHarmonica:
         return _pt
     
     def set_limites(self):
-        self._limites=array([-2.,2.]) #[min,max]
+        self._limites=array([-5.,5.]) #[min,max]
     
     def get_limites(self):
         return self._limites

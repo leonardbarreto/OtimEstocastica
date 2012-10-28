@@ -12,11 +12,27 @@ import pylab
 from numpy import matrix
 from numpy import linalg
 
+
 def funcao(x,indiceFuncao):
+    """ Parâmetros:
+        - x: vetor
+        - indiceFuncao: 
+        Função Twoeq7
+    """
     r = [0.0]*5
-    r[0] = 4*x[0]**2 - 20*x[0] + 0.25*x[1]**2 + 8
-    r[1] = 0.5*x[0]*x[1]**2 + 2*x[0] - 5*x[1] + 8
-    
+   # r[0] = 4*x[0]**2 - 20*x[0] + 0.25*x[1]**2 + 8
+    #r[1] = 0.5*x[0]*x[1]**2 + 2*x[0] - 5*x[1] + 8
+    a=0.5
+    b=0.8
+    c=0.3
+    kp=604500
+    P=0.00243
+    try:
+        r[0]=a-((c+2*x[0])**2*(a+b+c-2*x[0])**2)/(x[1])-x[0]
+    except ZeroDivisionError:
+        x[0]=0 #Condição do problema
+        x[1]=-1 #Condição do problema
+    r[1]=x[1]-kp*P**2*(b-3*x[0])**3
     """r[0] = x[0] - x[1] 
     r[1] = x[0]**2 + x[1]**2 - 1"""
 
@@ -26,6 +42,12 @@ def funcao(x,indiceFuncao):
     return r[indiceFuncao]
 
 def derivadaNumerica(indiceFuncao,ponto,indicePonto):
+    """ Parâmetros:
+        - indiceFuncao: indica a funçao a ser derivada
+        - ponto:
+        - indicePonto:
+
+    """    
     h = 0.001
     pontoCopia = ponto
     pontoCopia[indicePonto] = pontoCopia[indicePonto] - 2*h
@@ -47,6 +69,10 @@ def derivadaNumerica(indiceFuncao,ponto,indicePonto):
     return ((parcela1 - parcela2 + parcela3 - parcela4) / (12*h))   
 
 def calculaMatrizJacobiana(ordemMatriz,ponto):
+    """Parâmetros:
+        - ordemMatriz: indica a ordem da matriz (que deve ser quadrada)        
+        - ponto: variável que deseja-se derivar ("em função de")
+    """
     matriz = []
     for linha in range(ordemMatriz):
         tmp = []
@@ -73,11 +99,10 @@ def criterioParada(matriz,erro,dimensao):
     
 def resolveSistema(chuteInicial,dimensao):
     erro = 0.00001
-    #chuteInicial = [1,1]
     matrizJacobiana = matrix(calculaMatrizJacobiana(dimensao,chuteInicial))
     matrizTermoFonte = matrix(calculaTermoFonte(dimensao,chuteInicial))
     try:    
-        matrizSolucao = linalg.solve(matrizJacobiana,matrizTermoFonte)
+        matrizSolucao = linalg.solve(matrizJacobiana,matrizTermoFonte) #resolver sistema linear
     except LinAlgError:
         #return [0,0]
         return 'ERRO'
@@ -103,18 +128,19 @@ def resolveSistema(chuteInicial,dimensao):
     return chuteInicial
     
 def montaMatrizSolucao():
-    x1 = [-50,50]
-    x2 = [-50,50]
+    x1 = [-100,100]
+    x2 = [-100,100]
     amplitude = 1
     iniciador = x2[0]
     x = []
     while (x1[0] <= x1[1]):
         while (x2[0] <= x2[1]):
-            z = [x1[0],x2[0]]
+            z = [x1[0],x2[0]]   #Chute inicial
             x.append(resolveSistema(z,2))
             x2[0] = x2[0] + amplitude
         x2[0] = iniciador
         x1[0] = x1[0] + amplitude
+    #print x
     return x
     
 def distanciaEntrePontos(pontoUm,pontoDois,coordenada):
@@ -122,6 +148,12 @@ def distanciaEntrePontos(pontoUm,pontoDois,coordenada):
     return distancia
     
 def codificaRespostas():
+    """ Codifica as respostas em função dos valores encontrados. 
+        Assume-se o valor 0(zero) quando há erro. Os demais valores são em função do número de soluções do problema.
+        Para o sistema proposto, assume-se:
+            O valor 1(um) para ~ [0.05, 0.86] = cor branca
+            O valor 2(dois) para ~ [0.60, -3,57] = cor azul
+    """    
     lista = montaMatrizSolucao()
     codificacao = []
     solucoesDistintas = []
@@ -166,11 +198,12 @@ def codificaRespostas():
             tmp.append(codificacao[posicao])
             posicao = posicao + 1
         matriz.append(tmp[:])
+    #print matriz
     return matriz
 
 def baciaAtracaoRaizes():
     a = codificaRespostas()
-    pylab.imshow(a,cmap='jet',origin='lower',extent=[-2,2,-2,2])
+    pylab.imshow(a,cmap=get_cmap('Blues'),origin='lower',extent=[-100,100,-100,100])
     #pylab.imshow(a,origin='lower',extent=[-5,5,-5,5])
     pylab.xlabel('Valores da Primeira Coordenada')
     pylab.ylabel('Valores da Segunda Coordenada')
@@ -178,4 +211,5 @@ def baciaAtracaoRaizes():
     pylab.show()
     #pylab.savefig('Bacia Atracao de Raizes')
     return 0
+
 baciaAtracaoRaizes()
